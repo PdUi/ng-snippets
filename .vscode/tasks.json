@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "server-build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/Server/NgSnippets.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": "client-build"
+    },
+    {
+      "label": "client-build",
+      "type": "npm",
+      "script": "build",
+      "path": "Client/",
+      "problemMatcher": []
+    }
+  ]
+}

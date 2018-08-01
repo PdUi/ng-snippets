@@ -1,12 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/tmp
-/out-tsc
+Client/dist
+Client/tmp
+Client/out-tsc
+Server/bin
+Server/obj
+Server/wwwroot
 
 # dependencies
-/node_modules
+Client/node_modules
 
 # IDEs and editors
 /.idea
@@ -23,6 +26,9 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# IDE - VS
+.vs/*
 
 # misc
 /.sass-cache
