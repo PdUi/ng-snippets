@@ -28,7 +28,7 @@ Client/node_modules
 !.vscode/extensions.json
 
 # IDE - VS
-.vs/*
+Server/.vs/*
 
 # misc
 /.sass-cache

@@ -5,10 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": ".NET Core Launch (web)",
+      "name": "Development",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "server-build",
+      "preLaunchTask": "dev-server-build",
       "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp2.1/NgSnippets.dll",
       "args": [],
       "cwd": "${workspaceFolder}/Server",
@@ -30,6 +30,37 @@
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": "Production",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "prod-server-build",
+      "program": "${workspaceFolder}/Server/bin/Release/netcoreapp2.1/NgSnippets.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Server",
+      "stopAtEntry": false,
+      "internalConsoleOptions": "openOnSessionStart",
+      "launchBrowser": {
+        "enabled": true,
+        "args": "${auto-detect-url}",
+        "windows": {
+          "command": "cmd.exe",
+          "args": "/C start ${auto-detect-url}"
+        },
+        "osx": {
+          "command": "open"
+        },
+        "linux": {
+          "command": "xdg-open"
+        }
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"

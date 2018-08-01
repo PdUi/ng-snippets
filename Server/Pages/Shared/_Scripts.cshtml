@@ -1,0 +1,13 @@
+@using NgSnippets
+@addTagHelper *, NgSnippets
+
+<hashed-script script-name="runtime"></hashed-script>
+<hashed-script script-name="polyfills"></hashed-script>
+
+<environment include="Development">
+  <hashed-script script-name="styles"></hashed-script>
+  <hashed-script script-name="vendor"></hashed-script>
+</environment>
+
+<hashed-script script-name="main"></hashed-script>
+

@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "server-build",
+      "label": "dev-server-build",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -10,12 +10,32 @@
         "${workspaceFolder}/Server/NgSnippets.csproj"
       ],
       "problemMatcher": "$msCompile",
-      "dependsOn": "client-build"
+      "dependsOn": "dev-client-build"
     },
     {
-      "label": "client-build",
+      "label": "dev-client-build",
       "type": "npm",
       "script": "build",
+      "path": "Client/",
+      "problemMatcher": []
+    },
+    {
+      "label": "prod-server-build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/Server/NgSnippets.csproj",
+        "--configuration",
+        "Release"
+      ],
+      "problemMatcher": "$msCompile",
+      "dependsOn": "prod-client-build"
+    },
+    {
+      "label": "prod-client-build",
+      "type": "npm",
+      "script": "prod:build",
       "path": "Client/",
       "problemMatcher": []
     }
