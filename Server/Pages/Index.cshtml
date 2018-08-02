@@ -4,3 +4,6 @@
     ViewData["Title"] = "Home page";
 }
 
+<script>
+  var user = @Html.Raw(Json.Serialize(Model.DisplayUser));
+</script>

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+
+import { USER_TOKEN } from './user.provider';
+import { IUser } from './user';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ng-snippets';
+  user: IUser;
+
+  constructor(@Inject(USER_TOKEN) user: IUser) {
+    this.user = user;
+  }
 }
