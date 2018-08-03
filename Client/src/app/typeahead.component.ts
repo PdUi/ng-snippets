@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { random } from 'faker';
+
+import { SubscribedBaseComponent } from './subscribed-base.component';
 
 @Component({
   selector: 'app-typeahead',
@@ -23,16 +25,20 @@ import { random } from 'faker';
     </div>
   `
 })
-export class TypeaheadComponent {
+export class TypeaheadComponent extends SubscribedBaseComponent implements OnDestroy {
   input = new Subject<string>();
   realTimeSuggestions: string[] = [];
   delayedSuggestions: string[] = [];
 
   constructor() {
+    super();
+
     this.input
+        .pipe(takeUntil(this.onDestroy$))
         .subscribe(input => this.realTimeSuggestions = this.getWords(input));
 
     this.input
+        .pipe(takeUntil(this.onDestroy$))
         // doesn't react to every keystroke immediately.
         // delay of 300ms is hardly noticeable to the user, but prevents unnecessary network traffic
         // when the user pauses their keystrokes, then it will request the suggestions
@@ -60,5 +66,9 @@ export class TypeaheadComponent {
 
   onKeyup(input: string) {
     this.input.next(input);
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
   }
 }
