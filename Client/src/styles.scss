@@ -1,0 +1,16 @@
+.column,
+.row {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.fill {
+  flex-grow: 1;
+}

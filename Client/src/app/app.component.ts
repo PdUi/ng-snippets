@@ -1,7 +1,6 @@
-import { Component, Inject } from '@angular/core';
-
-import { USER_TOKEN } from './user.provider';
-import { IUser } from './user';
+import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +8,22 @@ import { IUser } from './user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  user: IUser;
+  input = new Subject<string>();
+  realTimeUpdate: string[] = [];
+  delayUpdate: string[] = [];
 
-  constructor(@Inject(USER_TOKEN) user: IUser) {
-    this.user = user;
+  constructor() {
+    this.input
+        .subscribe(input => this.realTimeUpdate.push(input));
+
+    this.input
+        .pipe(debounceTime(300))
+        .pipe(map((input) => input.trim()))
+        .pipe(distinctUntilChanged())
+        .subscribe(input => this.delayUpdate.push(input));
+  }
+
+  onKeyup(input: string) {
+    this.input.next(input);
   }
 }
